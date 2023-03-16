@@ -7,66 +7,66 @@ public class Shop {
 
 	public Shop() {
 		Item temp = new Item();
-		temp.kind = Item.WEAPON;
-		temp.name = "나무검";
-		temp.power = 3;
-		temp.price = 1000;
+		temp.setKind(Item.WEAPON);
+		temp.setName("냥냥펀치");
+		temp.setPower(3);
+		temp.setPrice(3000);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.WEAPON;
-		temp.name = "철검";
-		temp.power = 5;
-		temp.price = 2000;
+		temp.setKind(Item.WEAPON);
+		temp.setName("딱총나무지팡이");
+		temp.setPower(10);
+		temp.setPrice(8000);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.WEAPON;
-		temp.name = "레이피어";
-		temp.power = 7;
-		temp.price = 2500;
+		temp.setKind(Item.WEAPON);
+		temp.setName("빛나는 막대사탕");
+		temp.setPower(12);
+		temp.setPrice(8500);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.ARMOR;
-		temp.name = "티셔츠";
-		temp.power = 1;
-		temp.price = 300;
+		temp.setKind(Item.ARMOR);
+		temp.setName("병아리잠옷");
+		temp.setPower(2);
+		temp.setPrice(2000);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.ARMOR;
-		temp.name = "가죽갑옷";
-		temp.power = 4;
-		temp.price = 800;
+		temp.setKind(Item.ARMOR);
+		temp.setName("해리포터교복");
+		temp.setPower(3);
+		temp.setPrice(3000);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.ARMOR;
-		temp.name = "강철갑옷";
-		temp.power = 7;
-		temp.price = 1500;
+		temp.setKind(Item.ARMOR);
+		temp.setName("우비");
+		temp.setPower(4);
+		temp.setPrice(3500);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.RING;
-		temp.name = "은반지";
-		temp.power = 7;
-		temp.price = 3000;
+		temp.setKind(Item.RING);
+		temp.setName("실반지");
+		temp.setPower(4);
+		temp.setPrice(3500);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.RING;
-		temp.name = "금반지";
-		temp.power = 17;
-		temp.price = 6000;
+		temp.setKind(Item.RING);
+		temp.setName("마이스터링");
+		temp.setPower(5);
+		temp.setPrice(4000);
 		itemList.add(temp);
 
 		temp = new Item();
-		temp.kind = Item.RING;
-		temp.name = "다이아반지";
-		temp.power = 35;
-		temp.price = 20000;
+		temp.setKind(Item.RING);
+		temp.setName("다이아우정링");
+		temp.setPower(7);
+		temp.setPrice(5000);
 		itemList.add(temp);
 	}
 
@@ -85,19 +85,20 @@ public class Shop {
 				else if (selKind == Item.RING)
 					System.out.println("=========== [반지] ============");
 				printItems(selKind);
-				System.out.println("[골드 : " + Player.money + "]");
+				System.out.println("[골드 : " + Player.getMoney() + "]");
 				System.out.println("구입할 아이템 번호를 입력하세요 [0.뒤로가기]");
 				int selNum = MainGame.scan.nextInt();
 				if (selNum == 0)
 					break;
 				int count = 0;
 				for (int i = 0; i < itemList.size(); i++) {
-					if (itemList.get(i).kind == selKind) {
+					if (itemList.get(i).getKind() == selKind) {
 						count += 1;
 						if (count == selNum) {
 							Player.inven.addItem(itemList.get(i));
-							Player.money -= itemList.get(i).price;
-							System.out.println("[" + itemList.get(i).name + "] 을 구입했습니다.");
+							int payPrice = Player.getMoney() - itemList.get(i).getPrice();
+							Player.setMoney(payPrice);
+							System.out.println("[" + itemList.get(i).getName() + "] 을 구입했습니다.");
 							try {
 								Thread.sleep(1000);
 							} catch (InterruptedException e) {
@@ -114,12 +115,12 @@ public class Shop {
 	public void printItems(int kind) {
 		int count = 0;
 		for (int i = 0; i < itemList.size(); i++) {
-			if (itemList.get(i).kind != kind)
+			if (itemList.get(i).getKind() != kind)
 				continue;
 			System.out.print("[" + (count + 1) + "번]");
-			System.out.print("[이름 : " + itemList.get(i).name + "]");
-			System.out.print("[능력 : " + itemList.get(i).power + "]");
-			System.out.print("[가격 : " + itemList.get(i).price + "]");
+			System.out.print("[이름 : " + itemList.get(i).getName() + "] ");
+			System.out.print("[능력 : " + itemList.get(i).getPower() + "] ");
+			System.out.print("[가격 : " + itemList.get(i).getPrice()+ "골드]");
 			System.out.println("");
 			count += 1;
 		}

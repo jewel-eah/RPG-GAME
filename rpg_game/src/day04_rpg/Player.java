@@ -3,15 +3,23 @@ package day04_rpg;
 import java.util.ArrayList;
 
 public class Player {
-	static int money;
-	static Guild guild = new Guild();
-	static Inventory inven = new Inventory();
+	private static int money;
+	public static Guild guild = new Guild();
+	public static Inventory inven = new Inventory();
 
-	Player() {
+	public Player() {
 		money = 100000;
 		guild.setGuild();
 	}
 
+	public static int getMoney(){
+		return money;
+	}
+	
+	public static void setMoney(int setMoney) {
+		money = setMoney;
+	}
+	
 	public void guildMenu() {
 		guild.guildMenu();
 	}
